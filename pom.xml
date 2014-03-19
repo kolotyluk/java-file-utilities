@@ -9,7 +9,7 @@
 
   <groupId>net.kolotyluk.java</groupId>
   <artifactId>java-file-utilities</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.1-SNAPSHOT</version>
 
   <name>Java File Utilities</name>
   <description>Some useful utilities and extras not found other places.</description>
@@ -169,9 +169,8 @@
     </plugins>
   </reporting>
   <scm>
-	<connection>scm:git:https://github.com:kolotyluk/java-file-utilities.git</connection>
-	<url>scm:git:https://github.com:kolotyluk/java-file-utilities.git</url>
-	<developerConnection>scm:git:https://github.com:kolotyluk/java-file-utilities.git</developerConnection>
-    <tag>java-file-utilities-0.0.1</tag>
+	<connection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</connection>
+	<url>scm:git:https://github.com/kolotyluk/java-file-utilities.git</url>
+	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
   </scm>
 </project>
