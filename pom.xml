@@ -171,7 +171,7 @@
   <scm>
 	<connection>scm:git:git@github.com:kolotyluk/java-file-utilities</connection>
 	<url>scm:git:git@github.com:kolotyluk/java-file-utilities</url>
-	<developerConnection>scm:git:git://github.com/kolotyluk/java-file-utilities</developerConnection>
+	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities</developerConnection>
     <tag>java-file-utilities-0.0.1</tag>
   </scm>
 </project>
