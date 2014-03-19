@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+<!--   <parent> -->
+<!--     <groupId>net.kolotyluk</groupId> -->
+<!--     <artifactId>java</artifactId> -->
+<!--     <version>0.0.1-SNAPSHOT</version> -->
+<!--   </parent> -->
+
+  <groupId>net.kolotyluk.java</groupId>
+  <artifactId>java-file-utilities</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>Java File Utilities</name>
+  <description>Some useful utilities and extras not found other places.</description>
+  
+  <inceptionYear>2014</inceptionYear>
+  
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+  
+  <developers>
+    <developer>
+      <id>eric</id>
+      <name>Eric Kolotyluk</name>
+      <email>eric@kolotyluk.net</email>
+      <url>https://plus.google.com/+EricKolotyluk/about</url>
+      <organization>kolotyluk</organization>
+      <organizationUrl>http://kolotyluk.github.io</organizationUrl>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>-8</timezone>
+      <properties>
+        <picUrl>http://tinyurl.com/qgrhs46</picUrl>
+      </properties>
+    </developer>
+  </developers>
+  
+  <organization>
+  	<name>net.kolotyluk</name>
+  	<url>http://kolotyluk.github.io</url>
+  </organization>
+  
+  <properties>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <encoding>UTF-8</encoding>
+    <oroject.reporting.outputEncoding>UTF-8</oroject.reporting.outputEncoding>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.directory.studio</groupId>
+    	<artifactId>org.apache.commons.io</artifactId>
+    	<version>2.4</version>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>com.kenai.nbpwr</groupId>
+    	<artifactId>edu-umd-cs-findbugs-annotations</artifactId>
+    	<version>1.3.2-201002241900</version>
+    	<classifier>tests</classifier>
+    	<scope>provided</scope>
+    </dependency>
+  </dependencies>
+  
+  <profiles>
+    <profile>
+      <id>run-it</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.17</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <includeTests>true</includeTests>
+        </configuration>
+      </plugin>
+<!--       <plugin> -->
+<!--         <groupId>org.apache.maven.plugins</groupId> -->
+<!--         <artifactId>maven-project-info-reports-plugin</artifactId> -->
+<!--         <reportSets> -->
+<!--           <reportSet> -->
+<!--             <id>aggregate-project-info</id> -->
+<!--             <inherited>false</inherited> -->
+<!--             <reports> -->
+<!--               <report>index</report> -->
+<!--             </reports> -->
+<!--           </reportSet> -->
+<!--         </reportSets> -->
+<!--       </plugin> -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.17</version>
+        <configuration>
+          <showSuccess>false</showSuccess>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
