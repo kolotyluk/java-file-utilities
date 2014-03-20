@@ -1,7 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
+  <!--
+    http://central.sonatype.org/pages/ossrh-guide.html
+    https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
+    -->
 
   <parent>
     <groupId>org.sonatype.oss</groupId>
@@ -34,6 +37,12 @@
 	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
+  
+  <issueManagement>
+    <url>https://github.com/kolotyluk/java-file-utilities/issues</url>
+	<system>GitHub Issues</system>
+  </issueManagement>
+
   
   <developers>
     <developer>
@@ -93,21 +102,52 @@
     <pluginManagement>
       <plugins>
         <plugin>
-        <!--
-          Bugs in older versions prevent altReleaseDeploymentRepository
-          and altSnapshotDeploymentRepository from working correctly
-          https://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html
-         -->
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.1</version>
+          <!--
+            Bugs in older versions prevent altReleaseDeploymentRepository
+            and altSnapshotDeploymentRepository from working correctly
+            https://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html
+         -->
         </plugin>
         <plugin>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.5</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.3.1</version>
         </plugin>
+        <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <preparationGoals>clean verify</preparationGoals>
+        </configuration>
+      </plugin>
+        
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-versions</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.1.0</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>1.7</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
@@ -123,21 +163,45 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>com.github.github</groupId>
-        <artifactId>site-maven-plugin</artifactId>
-        <version>0.9</version>
+        <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <message>Creating site for ${project.version}</message>
+          <preparationGoals>clean failsafe:verify</preparationGoals>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>site</goal>
-            </goals>
-            <phase>site</phase>
-          </execution>
-        </executions>
       </plugin>
+<!--       <plugin> -->
+<!--         <groupId>com.github.github</groupId> -->
+<!--         <artifactId>site-maven-plugin</artifactId> -->
+<!--         <version>0.9</version> -->
+<!--         <configuration> -->
+<!--           <message>Creating site for ${project.version}</message> -->
+<!--         </configuration> -->
+<!--         <executions> -->
+<!--           <execution> -->
+<!--             <goals> -->
+<!--               <goal>site</goal> -->
+<!--             </goals> -->
+<!--             <phase>site</phase> -->
+<!--           </execution> -->
+<!--         </executions> -->
+<!--       </plugin> -->
+       <plugin>
+           <!-- deploy the site to github pages -->
+           <groupId>com.github.github</groupId>
+           <artifactId>site-maven-plugin</artifactId>
+<!--            <version>0.7</version> -->
+           <configuration>
+               <server>github</server> <!-- the id of the server with the passwords in settings.xml -->
+               <message>Creating site for ${project.version}</message>
+           </configuration>
+           <executions>
+               <execution>
+                   <phase>site</phase>
+                   <goals>
+                       <goal>site</goal> <!-- the site goal uploads to ghpages -->
+                   </goals>
+               </execution>
+           </executions>
+       </plugin>
     </plugins>
   </build>
   
