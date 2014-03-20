@@ -1,11 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
+  <!-- https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide -->
 
-<!--   <parent> -->
-<!--     <groupId>net.kolotyluk</groupId> -->
-<!--     <artifactId>java</artifactId> -->
-<!--     <version>0.0.1-SNAPSHOT</version> -->
-<!--   </parent> -->
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
 
   <groupId>net.kolotyluk.java</groupId>
   <artifactId>java-file-utilities</artifactId>
@@ -13,6 +15,7 @@
 
   <name>Java File Utilities</name>
   <description>Some useful utilities and extras not found other places.</description>
+  <url>http://kolotyluk.github.io/java-file-utilities</url>
   
   <inceptionYear>2014</inceptionYear>
   
@@ -25,13 +28,20 @@
     </license>
   </licenses>
   
+  <scm>
+  	<url>https://github.com/kolotyluk/java-file-utilities.git</url>
+	<connection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</connection>
+	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  
   <developers>
     <developer>
       <id>eric</id>
       <name>Eric Kolotyluk</name>
       <email>eric@kolotyluk.net</email>
       <url>https://plus.google.com/+EricKolotyluk/about</url>
-      <organization>kolotyluk</organization>
+      <organization>Open Source by Eric Kolotyluk</organization>
       <organizationUrl>http://kolotyluk.github.io</organizationUrl>
       <roles>
         <role>architect</role>
@@ -45,33 +55,17 @@
   </developers>
   
   <organization>
-  	<name>net.kolotyluk</name>
+  	<name>Open Source by Eric Kolotyluk</name>
   	<url>http://kolotyluk.github.io</url>
   </organization>
   
   <properties>
+    <encoding>UTF-8</encoding>
+    <github.global.server>github</github.global.server>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-    <encoding>UTF-8</encoding>
     <oroject.reporting.outputEncoding>UTF-8</oroject.reporting.outputEncoding>
   </properties>
-  
-  <distributionManagement>
-    <downloadUrl>http://localhost:8081/nexus/content/groups/public</downloadUrl>
-    <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>nexus-kolotyluk</id>
-      <name>Personal Release Repository</name>
-      <url>http://localhost:8081/nexus/content/repositories/releases</url>
-      <layout>default</layout>
-    </repository>
-    <snapshotRepository>
-      <id>nexus-kolotyluk</id>
-      <name>Personal Snapshot Repository</name>
-      <url>http://localhost:8081/nexus/content/repositories/snapshots</url>
-      <layout>default</layout>
-    </snapshotRepository>
-  </distributionManagement>
   
   <dependencies>
     <dependency>
@@ -94,6 +88,58 @@
     	<scope>provided</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+        <!--
+          Bugs in older versions prevent altReleaseDeploymentRepository
+          and altSnapshotDeploymentRepository from working correctly
+          https://maven.apache.org/plugins/maven-deploy-plugin/deploy-mojo.html
+         -->
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.9</version>
+        <configuration>
+          <message>Creating site for ${project.version}</message>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>site</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   
   <profiles>
     <profile>
@@ -118,16 +164,6 @@
     </profile>
   </profiles>
   
-<!--   <build> -->
-<!--     <plugins> -->
-<!--       <plugin> -->
-<!--         <groupId>org.apache.maven.plugins</groupId> -->
-<!--         <artifactId>maven-release-plugin</artifactId> -->
-<!--         <version>2.5</version> -->
-<!--       </plugin> -->
-<!--     </plugins> -->
-<!--   </build> -->
-  
   <reporting>
     <plugins>
       <plugin>
@@ -145,19 +181,6 @@
           <includeTests>true</includeTests>
         </configuration>
       </plugin>
-<!--       <plugin> -->
-<!--         <groupId>org.apache.maven.plugins</groupId> -->
-<!--         <artifactId>maven-project-info-reports-plugin</artifactId> -->
-<!--         <reportSets> -->
-<!--           <reportSet> -->
-<!--             <id>aggregate-project-info</id> -->
-<!--             <inherited>false</inherited> -->
-<!--             <reports> -->
-<!--               <report>index</report> -->
-<!--             </reports> -->
-<!--           </reportSet> -->
-<!--         </reportSets> -->
-<!--       </plugin> -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
@@ -168,10 +191,4 @@
       </plugin>
     </plugins>
   </reporting>
-  <scm>
-  	<url>https://github.com/kolotyluk/java-file-utilities.git</url>
-	<connection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</connection>
-	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
 </project>
