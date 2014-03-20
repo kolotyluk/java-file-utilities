@@ -35,7 +35,6 @@
   	<url>https://github.com/kolotyluk/java-file-utilities.git</url>
 	<connection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</connection>
 	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
-    <tag>HEAD</tag>
   </scm>
   
   <issueManagement>
