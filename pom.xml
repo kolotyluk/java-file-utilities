@@ -14,7 +14,7 @@
 
   <groupId>net.kolotyluk.java</groupId>
   <artifactId>java-file-utilities</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7-SNAPSHOT</version>
 
   <name>Java File Utilities</name>
   <description>Some useful utilities and extras not found other places.</description>
@@ -35,7 +35,6 @@
   	<url>https://github.com/kolotyluk/java-file-utilities.git</url>
 	<connection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</connection>
 	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
-    <tag>java-file-utilities-0.0.6</tag>
   </scm>
   
   <issueManagement>
@@ -119,26 +118,26 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>2.17</version>
-<!--           <executions> -->
-<!--             <execution> -->
-<!--               <id>default-integration-test</id> -->
-<!--               <goals> -->
-<!--                 <goal>integration-test</goal> -->
-<!--               </goals> -->
-<!--             </execution> -->
-<!--             <execution> -->
-<!--               <id>default-verify</id> -->
-<!--               <goals> -->
-<!--                 <goal>verify</goal> -->
-<!--               </goals> -->
-<!--             </execution> -->
-<!--           </executions> -->
+          <executions>
+            <execution>
+              <id>default-integration-test</id>
+              <goals>
+                <goal>integration-test</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>default-verify</id>
+              <goals>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5</version>
           <configuration>
-            <preparationGoals>clean verify</preparationGoals>
+            <preparationGoals>clean verify site</preparationGoals>
           </configuration>
         </plugin>
         <plugin>
@@ -185,12 +184,13 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <configuration>
-          <preparationGoals>clean verify site</preparationGoals>
-        </configuration>
-      </plugin>
+<!--       <plugin> -->
+<!--         <artifactId>maven-release-plugin</artifactId> -->
+<!--         <configuration> -->
+<!--           <preparationGoals>clean verify site</preparationGoals> -->
+<!--         </configuration> -->
+<!--       </plugin> -->
+
 <!--       <plugin> -->
 <!--         <groupId>com.github.github</groupId> -->
 <!--         <artifactId>site-maven-plugin</artifactId> -->
