@@ -14,7 +14,7 @@
 
   <groupId>net.kolotyluk.java</groupId>
   <artifactId>java-file-utilities</artifactId>
-  <version>0.0.8</version>
+  <version>0.0.9-SNAPSHOT</version>
 
   <name>Java File Utilities</name>
   <description>Some useful utilities and extras not found other places.</description>
@@ -35,7 +35,6 @@
   	<url>https://github.com/kolotyluk/java-file-utilities.git</url>
 	<connection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</connection>
 	<developerConnection>scm:git:https://github.com/kolotyluk/java-file-utilities.git</developerConnection>
-    <tag>java-file-utilities-0.0.8</tag>
   </scm>
   
   <issueManagement>
@@ -185,7 +184,7 @@
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
-          <preparationGoals>clean verify site</preparationGoals>
+          <preparationGoals>clean verify site -P run-it</preparationGoals>
         </configuration>
       </plugin>
 
